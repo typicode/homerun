@@ -1,0 +1,33 @@
+{
+  "name": "homerun",
+  "version": "1.0.0",
+  "description": "homerun",
+  "bin": "./bin.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/typicode/homerun.git"
+  },
+  "keywords": [
+    "npm",
+    "run",
+    "cli",
+    "router",
+    "command",
+    "scripts"
+  ],
+  "author": "Typicode",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/typicode/homerun/issues"
+  },
+  "homepage": "https://github.com/typicode/homerun",
+  "devDependencies": {
+    "tape": "^3.0.3"
+  },
+  "dependencies": {
+    "shell-quote": "^1.4.2"
+  }
+}
