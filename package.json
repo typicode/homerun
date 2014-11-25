@@ -1,6 +1,6 @@
 {
   "name": "homerun",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "homerun",
   "bin": "./bin.js",
   "scripts": {
@@ -14,8 +14,6 @@
     "npm",
     "run",
     "cli",
-    "router",
-    "command",
     "scripts"
   ],
   "author": "Typicode",
