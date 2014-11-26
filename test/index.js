@@ -1,6 +1,12 @@
 var assert = require('assert')
-var homerun = require('./')
-var pkg = require('./package.json')
+var homerun = require('../')
+
+var pkg = {
+  scripts: {
+    add: 'node test/add'
+  }
+}
+
 
 homerun(pkg, [,, 'add', '1', '2']).exec(function(err, stdout, stderr) {
   assert.equal('3\n', stdout)
@@ -18,7 +24,7 @@ homerun(pkg, [,,]).exec(function(err, stdout, stderr) {
   assert.equal(err.code, 1)
 })
 
-pkg.scripts.help = 'node help'
+pkg.scripts.default = 'node test/help'
 homerun(pkg, [,, 'unknown']).exec(function(err, stdout, stderr) {
   assert.equal('help\n', stdout)
   assert.equal(err, null)

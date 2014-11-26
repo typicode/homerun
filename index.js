@@ -8,30 +8,39 @@ module.exports = function(pkg, argv) {
   var args = argv.slice(3).join(' ')
 
   // Pick script
-  var name = argv[2] ? argv[2] : 'help'
-
+  var name = argv[2]
   var scripts = pkg.scripts
+  if (!scripts.hasOwnProperty(name)) name = 'default'
   var script = scripts[name]
-
-  // Extract cmd and rebuild args
-  var parsed = parse(script + ' ' + args, process.env)
-  var cmd = parsed.shift()
-  var args = parsed
 
   return {
     spawn: function() {
-      return cp.spawn(cmd, args, {
-          stdio: 'inherit'
-        })
-        .on('error', function(err) {
-          console.error(err)
-          process.exit(1)
-        })
-        .on('exit', process.exit)
-        .on('close', process.exit)
+      if (script) {
+        // Extract cmd and rebuild args
+        var parsed = parse(script + ' ' + args, process.env)
+        var cmd = parsed.shift()
+        var args = parsed
+
+        // Spawn
+        return cp.spawn(cmd, args, {
+            stdio: 'inherit'
+          })
+          .on('error', function(err) {
+            console.error(err)
+            process.exit(1)
+          })
+          .on('exit', process.exit)
+          .on('close', process.exit)
+      } else {
+        process.exit(1)
+      }
     },
     exec: function(cb) {
-      return cp.exec([cmd].concat(args).join(' '), cb)
+      if (script) {
+        return cp.exec(script + ' ' + args, cb)
+      } else {
+        cb({ code: 1 }, '', '')
+      }
     }
   }
 }
