@@ -1,7 +1,7 @@
 {
   "name": "homerun",
-  "version": "0.1.0",
-  "description": "homerun",
+  "version": "0.2.0",
+  "description": "Turn package.json scripts into CLI commands",
   "bin": "./bin.js",
   "scripts": {
     "test": "node test"
