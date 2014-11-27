@@ -74,3 +74,7 @@ homerun(pkg, argv).exec(function(err, stdout, stderr) {
   assert.equal('3\n', stdout)
 })
 ```
+
+## License
+
+MIT - [Typicode](https://github.com/typicode)
