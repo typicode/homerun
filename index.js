@@ -10,8 +10,20 @@ module.exports = function(pkg, argv) {
   // Pick script
   var name = argv[2]
   var scripts = pkg.scripts
-  if (!scripts.hasOwnProperty(name)) name = 'default'
-  var script = scripts[name]
+
+  var script
+
+  if (name) {
+    if (scripts[name]) {
+      script = scripts[name]
+    } else if (scripts['default']) {
+      script = scripts['default']
+    }
+  } else {
+    if (scripts['blank']) {
+      script = scripts['blank']
+    }
+  }
 
   return {
     spawn: function() {
