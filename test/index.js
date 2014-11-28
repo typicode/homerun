@@ -43,3 +43,11 @@ homerun(pkg, [,,]).exec(function(err, stdout, stderr) {
   assert.equal(err, null)
   assert.equal('blank\n', stdout)
 })
+
+// Test with environment variable
+pkg.scripts.env = "echo $HOME $1"
+
+homerun(pkg, [,, 'env', 'foo']).exec(function(err, stdout, stderr) {
+  assert.equal(err, null)
+  assert.equal(process.env.HOME + ' foo\n', stdout)
+})

@@ -75,6 +75,10 @@ homerun(pkg, argv).exec(function(err, stdout, stderr) {
 })
 ```
 
+## Known limit
+
+Homerun doesn't support yet multiple commands, for example `echo foo && echo bar`.
+
 ## License
 
 MIT - [Typicode](https://github.com/typicode)

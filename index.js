@@ -5,7 +5,7 @@ module.exports = function(pkg, argv) {
   process.env.PATH =  './node_modules/.bin:' + process.env.PATH
 
   // Extract args
-  var args = argv.slice(3).join(' ')
+  var argString = argv.slice(3).join(' ')
 
   // Pick script
   var name = argv[2]
@@ -28,13 +28,14 @@ module.exports = function(pkg, argv) {
   return {
     spawn: function() {
       if (script) {
+
         // Extract cmd and rebuild args
-        var parsed = parse(script + ' ' + args, process.env)
+        var parsed = parse(script + ' ' + argString, process.env)
         var cmd = parsed.shift()
-        var args = parsed
+        var argArray = parsed
 
         // Spawn
-        return cp.spawn(cmd, args, {
+        return cp.spawn(cmd, argArray, {
             stdio: 'inherit'
           })
           .on('error', function(err) {
@@ -49,7 +50,7 @@ module.exports = function(pkg, argv) {
     },
     exec: function(cb) {
       if (script) {
-        return cp.exec(script + ' ' + args, cb)
+        return cp.exec(script + ' ' + argString, cb)
       } else {
         cb({ code: 1 }, '', '')
       }
