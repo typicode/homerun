@@ -75,9 +75,9 @@ homerun(pkg, argv).exec(function(err, stdout, stderr) {
 })
 ```
 
-## Known limit
+## Limit
 
-Homerun doesn't support yet multiple commands, for example `echo foo && echo bar`.
+Homerun doesn't support multiple commands, for example `echo foo && echo bar`.
 
 ## License
 
