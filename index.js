@@ -1,7 +1,7 @@
 var cp = require('child_process')
 var parse = require('shell-quote').parse
 
-module.exports = function(pkg, argv) {
+module.exports = function(scripts, argv) {
   process.env.PATH =  './node_modules/.bin:' + process.env.PATH
 
   // Extract args
@@ -9,10 +9,7 @@ module.exports = function(pkg, argv) {
 
   // Pick script
   var name = argv[2]
-  var scripts = pkg.scripts
-
   var script
-
   if (name) {
     if (scripts[name]) {
       script = scripts[name]

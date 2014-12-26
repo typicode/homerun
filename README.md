@@ -1,9 +1,6 @@
-# Homerun [![](https://badge.fury.io/js/homerun.svg)](http://badge.fury.io/js/homerun) [![](https://travis-ci.org/typicode/homerun.svg?branch=master)](https://travis-ci.org/typicode/homerun)
+# Homerun [![](https://travis-ci.org/typicode/homerun.svg?branch=master)](https://travis-ci.org/typicode/homerun) [![npm](https://img.shields.io/npm/v/homerun.svg?style=flat)](https://www.npmjs.com/package/homerun)
 
-![](http://i.imgur.com/Bs7wA8v.gif)
-
-Since npm 2.0, you can pass arguments to scripts... wait... what if you coud use that for creating CLIs?
-
+> Since npm 2.0, you can pass arguments to scripts... wait... what if you coud use that for creating CLIs?
 Homerun is a little experiment that lets you just do that. If you need more, I highly recommend [minimist](https://github.com/substack/minimist).
 
 ## Usage
@@ -11,18 +8,23 @@ Homerun is a little experiment that lets you just do that. If you need more, I h
 Let's say you have a script called `add` that you can run this way:
 
 ```bash
-$ npm run add -- 1 2
+npm run add -- 1 2
 3
 ```
 
-Simply install `homerun` and add it to your `package.json`
+Install homerun
 
-`npm install homerun --save`
+```bash
+npm install homerun --save
+```
+
+Add it to your `package.json`
 
 ```javascript
 {
-  "name": "mycli"
-  "bin": "./node_modules/.bin/homerun"
+  "name": "cli"
+  // Add homerun bin here
+  "bin": "./node_modules/.bin/homerun" 
   "scripts": {
     "add": "node commands/add"
   }
@@ -32,9 +34,8 @@ Simply install `homerun` and add it to your `package.json`
 Now, without any other setup, if you `npm link` or `npm publish` you get a CLI for free:
 
 ```bash
-$ mycli add 1 2
+cli add 1 2
 3
-# BOOM!
 ```
 
 ## Options
@@ -43,8 +44,8 @@ Homerun will use this scripts in case no command is provided or matches.
 
 ```javascript
 "scripts": {
-  "blank": "npm start"          // mycli
-  "default": "echo usage: ..."  // mycli unknown command
+  "blank": "npm start"          // no command provided
+  "default": "echo usage: ..."  // unknown command provided
 }
 ```
 
@@ -53,22 +54,28 @@ Homerun will use this scripts in case no command is provided or matches.
 If you need to customize, you can use homerun as a module.
 
 ```javascript
+// index.js
 var homerun = require('homerun')
-var pkg = require('./package.json')
+var scripts = require('./package.json').scripts
 
-// Do things with pkg.scripts...
+homerun(scripts, process.argv).spawn()
+```
 
-homerun(pkg, process.argv).spawn()
+```javascript
+// package.json
+{
+  "bin": "index.js"
+}
 ```
 
 ## Test
 
-Testing is easy too, simply run `homerun.exec()` to test output and exit code.
+To test your commands, use `homerun.exec()`
 
 ```javascript
 var argv = [,, 'add', '1', '2']
 
-homerun(pkg, argv).exec(function(err, stdout, stderr) {
+homerun(scripts, argv).exec(function(err, stdout, stderr) {
   assert.equal(err, null)
   assert.equal('', stderr)
   assert.equal('3\n', stdout)
@@ -77,8 +84,10 @@ homerun(pkg, argv).exec(function(err, stdout, stderr) {
 
 ## Limit
 
-Homerun doesn't support multiple commands, for example `echo foo && echo bar`.
+Homerun doesn't support multiple commands. For example, `echo foo && echo bar` won't work.
 
 ## License
 
 MIT - [Typicode](https://github.com/typicode)
+
+![](http://i.imgur.com/Bs7wA8v.gif)

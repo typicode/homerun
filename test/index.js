@@ -1,53 +1,51 @@
 var assert = require('assert')
 var homerun = require('../')
 
-var pkg = {
-  scripts: {
-    add: 'node test/add'
-  }
+var scripts = {
+  add: 'node test/add'
 }
 
 // Test without default and blank scripts
-homerun(pkg, [,, 'add', '1', '2']).exec(function(err, stdout, stderr) {
+homerun(scripts, [,, 'add', '1', '2']).exec(function(err, stdout, stderr) {
   assert.equal(err, null)
   assert.equal('', stderr)
   assert.equal('3\n', stdout)
 })
 
-homerun(pkg, [,, 'unknown']).exec(function(err, stdout, stderr) {
+homerun(scripts, [,, 'unknown']).exec(function(err, stdout, stderr) {
   assert.notEqual(err, null)
   assert.equal(err.code, 1)
 })
 
-homerun(pkg, [,,]).exec(function(err, stdout, stderr) {
+homerun(scripts, [,,]).exec(function(err, stdout, stderr) {
   assert.notEqual(err, null)
   assert.equal(err.code, 1)
 })
 
 // Test with default and blank scripts
-pkg.scripts.default = 'echo default'
-pkg.scripts.blank = "echo blank"
+scripts.default = 'echo default'
+scripts.blank = "echo blank"
 
-homerun(pkg, [,, 'add', '1', '2']).exec(function(err, stdout, stderr) {
+homerun(scripts, [,, 'add', '1', '2']).exec(function(err, stdout, stderr) {
   assert.equal(err, null)
   assert.equal('', stderr)
   assert.equal('3\n', stdout)
 })
 
-homerun(pkg, [,, 'unknown']).exec(function(err, stdout, stderr) {
+homerun(scripts, [,, 'unknown']).exec(function(err, stdout, stderr) {
   assert.equal(err, null)
   assert.equal('default\n', stdout)
 })
 
-homerun(pkg, [,,]).exec(function(err, stdout, stderr) {
+homerun(scripts, [,,]).exec(function(err, stdout, stderr) {
   assert.equal(err, null)
   assert.equal('blank\n', stdout)
 })
 
 // Test with environment variable
-pkg.scripts.env = "echo $HOME $1"
+scripts.env = "echo $HOME $1"
 
-homerun(pkg, [,, 'env', 'foo']).exec(function(err, stdout, stderr) {
+homerun(scripts, [,, 'env', 'foo']).exec(function(err, stdout, stderr) {
   assert.equal(err, null)
   assert.equal(process.env.HOME + ' foo\n', stdout)
 })
