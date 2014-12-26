@@ -40,7 +40,7 @@ cli add 1 2
 
 ## Options
 
-Homerun will use this scripts in case no command is provided or matches.
+Homerun will use these scripts in case no command is provided or matches.
 
 ```javascript
 "scripts": {
