@@ -38,6 +38,8 @@ cli add 1 2
 3
 ```
 
+And of course, while you develop, you can still use `npm run add --` to test your command. 
+
 ## Options
 
 Homerun will use these scripts in case no command is provided or matches.
@@ -51,7 +53,7 @@ Homerun will use these scripts in case no command is provided or matches.
 
 ## Module
 
-If you need to customize, you can use homerun as a module.
+If you need to customize, homerun can be used as a module.
 
 ```javascript
 // index.js
@@ -70,7 +72,7 @@ homerun(scripts, process.argv).spawn()
 
 ## Test
 
-To test your commands, use `homerun.exec()`
+To test your commands, you can use `homerun.exec()`
 
 ```javascript
 var argv = [,, 'add', '1', '2']
