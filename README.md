@@ -38,7 +38,7 @@ cli add 1 2
 3
 ```
 
-And of course, while you develop, you can still use `npm run add --` to test your command. 
+And of course, while you develop, you can still use `npm run add` to test your command. 
 
 ## Options
 
