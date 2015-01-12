@@ -46,8 +46,8 @@ Homerun will use these scripts in case no command is provided or matches.
 
 ```javascript
 "scripts": {
-  "blank": "npm start"          // no command provided
-  "default": "echo usage: ..."  // unknown command provided
+  "index": "node commands/index"  // no command provided
+  "unknown": "node commands/help" // unknown command provided
 }
 ```
 
@@ -75,6 +75,8 @@ homerun(scripts, process.argv).spawn()
 To test your commands, you can use `homerun.exec()`
 
 ```javascript
+var assert = require('assert')
+
 var argv = [,, 'add', '1', '2']
 
 homerun(scripts, argv).exec(function(err, stdout, stderr) {

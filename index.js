@@ -13,12 +13,12 @@ module.exports = function(scripts, argv) {
   if (name) {
     if (scripts[name]) {
       script = scripts[name]
-    } else if (scripts['default']) {
-      script = scripts['default']
+    } else if (scripts['unknown']) {
+      script = scripts['unknown']
     }
   } else {
-    if (scripts['blank']) {
-      script = scripts['blank']
+    if (scripts['index']) {
+      script = scripts['index']
     }
   }
 

@@ -5,7 +5,7 @@ var scripts = {
   add: 'node test/add'
 }
 
-// Test without default and blank scripts
+// Test without unknown and index scripts
 homerun(scripts, [,, 'add', '1', '2']).exec(function(err, stdout, stderr) {
   assert.equal(err, null)
   assert.equal('', stderr)
@@ -22,9 +22,9 @@ homerun(scripts, [,,]).exec(function(err, stdout, stderr) {
   assert.equal(err.code, 1)
 })
 
-// Test with default and blank scripts
-scripts.default = 'echo default'
-scripts.blank = "echo blank"
+// Test with unknown and index scripts
+scripts.unknown = 'echo unknown'
+scripts.index = "echo index"
 
 homerun(scripts, [,, 'add', '1', '2']).exec(function(err, stdout, stderr) {
   assert.equal(err, null)
@@ -34,12 +34,12 @@ homerun(scripts, [,, 'add', '1', '2']).exec(function(err, stdout, stderr) {
 
 homerun(scripts, [,, 'unknown']).exec(function(err, stdout, stderr) {
   assert.equal(err, null)
-  assert.equal('default\n', stdout)
+  assert.equal('unknown\n', stdout)
 })
 
 homerun(scripts, [,,]).exec(function(err, stdout, stderr) {
   assert.equal(err, null)
-  assert.equal('blank\n', stdout)
+  assert.equal('index\n', stdout)
 })
 
 // Test with environment variable
