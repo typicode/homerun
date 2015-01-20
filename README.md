@@ -1,6 +1,8 @@
 # Homerun [![](https://travis-ci.org/typicode/homerun.svg?branch=master)](https://travis-ci.org/typicode/homerun) [![npm version](https://badge.fury.io/js/homerun.svg)](http://badge.fury.io/js/homerun)
 
-> Since npm 2.0, you can pass arguments to scripts... wait... what if you coud use that for creating CLIs?
+> Turn stand-alone scripts into commands
+
+Since npm 2.0, you can pass arguments to scripts... wait... what if you coud use that for creating CLIs?
 Homerun is a little experiment that lets you just do that. If you need more, I highly recommend [minimist](https://github.com/substack/minimist).
 
 ## Usage
@@ -23,8 +25,7 @@ Add it to your `package.json`
 ```javascript
 {
   "name": "cli"
-  // Add homerun bin here
-  "bin": "./node_modules/.bin/homerun" 
+  "bin": "./node_modules/.bin/homerun" // <-- here
   "scripts": {
     "add": "node commands/add"
   }
