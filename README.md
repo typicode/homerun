@@ -2,7 +2,7 @@
 
 > Turn stand-alone scripts into commands
 
-Since npm 2.0, you can pass arguments to scripts... wait... what if you coud use that for creating CLIs?
+Since npm 2.0, you can pass arguments to scripts... wait... what if you could use that for creating CLIs?
 Homerun is a little experiment that lets you just do that. If you need more, I highly recommend [minimist](https://github.com/substack/minimist).
 
 ## Usage
