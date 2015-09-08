@@ -1,7 +1,7 @@
 var cp = require('child_process')
 var parse = require('shell-quote').parse
 
-module.exports = function(scripts, argv) {
+module.exports = function(scripts, argv, cwd) {
   process.env.PATH =  './node_modules/.bin:' + process.env.PATH
 
   // Extract args
@@ -33,7 +33,8 @@ module.exports = function(scripts, argv) {
 
         // Spawn
         return cp.spawn(cmd, argArray, {
-            stdio: 'inherit'
+            stdio: 'inherit',
+            cwd: cwd
           })
           .on('error', function(err) {
             console.error(err)
@@ -47,7 +48,7 @@ module.exports = function(scripts, argv) {
     },
     exec: function(cb) {
       if (script) {
-        return cp.exec(script + ' ' + argString, cb)
+        return cp.exec(script + ' ' + argString, {cwd: cwd}, cb)
       } else {
         cb({ code: 1 }, '', '')
       }
